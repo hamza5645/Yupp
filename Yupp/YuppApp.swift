@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct YuppApp: App {
@@ -13,5 +14,6 @@ struct YuppApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: Tasks.self)
     }
 }
