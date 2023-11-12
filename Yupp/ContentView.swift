@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-
-import SwiftUI
+import SwiftData
 
 // Custom Yellow
 let yellowCustom = Color(red: 1, green: 0.811, blue: 0, opacity: 1.0)
