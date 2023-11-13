@@ -19,23 +19,21 @@ struct ContentView: View {
     var body: some View {
         
         NavigationStack(path: $path) {
-            List {
+            VStack {
                 ForEach(tasks) { tasks in
                     NavigationLink(value: tasks) {
                         VStack(alignment: .leading) {
-                            Text(tasks.title)
-                                .font(.headline)
-                            
-                            Text(tasks.date.formatted(date: .long, time: .shortened))
+                            TaskView(title: tasks.title)
                         }
                     }
                 }
                 .onDelete(perform: deleteTask)
+                
+                Spacer()
             }
             .navigationDestination(for: Task.self, destination: EditView.init)
             .navigationTitle("Title")
             .toolbar {
-                Button("Add Samples", action: addSample)
                 Button("Add Task", action: addTask)
             }
         }
@@ -64,15 +62,6 @@ struct ContentView: View {
 //            }
 //            Spacer()
 //        }
-    }
-    func addSample() {
-        let work = Task(title: "Work")
-        let study = Task(title: "Study")
-        let home = Task(title: "Home")
-        
-        modelContext.insert(work)
-        modelContext.insert(study)
-        modelContext.insert(home)
     }
     
     func addTask() {
@@ -110,14 +99,18 @@ struct TaskView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(height: 60)
                 .foregroundStyle(yellowCustom)
                 .cornerRadius(5)
-                .padding([.trailing, .leading])
-            Text(title)
-                .font(.system(size: 30))
-                .foregroundStyle(.black)
+            HStack {
+                Text(title)
+                    .font(.system(size: 30))
+                    .foregroundStyle(.black)
+                    .padding()
+                Spacer()
+            }
         }
+        .frame(height: 60)
+        .padding([.trailing, .leading, .bottom])
     }
 }
 
