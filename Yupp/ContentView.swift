@@ -12,12 +12,14 @@ import SwiftData
 let yellowCustom = Color(red: 1, green: 0.811, blue: 0, opacity: 1.0)
 
 struct ContentView: View {
+    //SwiftData
     @Environment(\.modelContext) var modelContext
     @Query var tasks: [Task]
     @State private var path = [Task]()
     
     var body: some View {
         
+        //Tasks View
         NavigationStack(path: $path) {
             VStack {
                 ForEach(tasks) { tasks in
@@ -37,39 +39,15 @@ struct ContentView: View {
                 Button("Add Task", action: addTask)
             }
         }
-//        VStack {
-//            //Title and Bar
-//            HStack {
-//                Text("Personal")
-//                    .font(.system(size: 34))
-//                    .padding()
-//                
-//                Spacer()
-//                //Dot View
-//                DotView(color: .primary, hasTrailingPadding: false)
-//                DotView(color: .secondary, hasTrailingPadding: false)
-//                DotView(color: .secondary, hasTrailingPadding: false)
-//                DotView(color: .secondary, hasTrailingPadding: true)
-//                
-//            }
-//            .padding(.bottom)
-//            
-//            VStack {
-//                //Task View
-//                TaskView(title: "Swipe Right (Done)")
-//                TaskView(title: "Swipe Left (Delete)")
-//                TaskView(title: "Swipe Down (Add)")
-//            }
-//            Spacer()
-//        }
     }
     
+    // addTask
     func addTask() {
         let task = Task()
         modelContext.insert(task)
-//        path = [task]
     }
     
+    // deleteTask
     func deleteTask(_ indexSet: IndexSet) {
         for index in indexSet {
             let task = tasks[index]
