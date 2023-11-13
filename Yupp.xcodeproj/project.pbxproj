@@ -11,7 +11,8 @@
 		2F4925392B00FE2900C471A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4925382B00FE2900C471A7 /* ContentView.swift */; };
 		2F49253B2B00FE2D00C471A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F49253A2B00FE2D00C471A7 /* Assets.xcassets */; };
 		2F49253E2B00FE2D00C471A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F49253D2B00FE2D00C471A7 /* Preview Assets.xcassets */; };
-		2F4925452B00FE3E00C471A7 /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4925442B00FE3E00C471A7 /* Tasks.swift */; };
+		2F4925452B00FE3E00C471A7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4925442B00FE3E00C471A7 /* Task.swift */; };
+		2F4925472B02084900C471A7 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4925462B02084900C471A7 /* EditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,7 +21,8 @@
 		2F4925382B00FE2900C471A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2F49253A2B00FE2D00C471A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F49253D2B00FE2D00C471A7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2F4925442B00FE3E00C471A7 /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
+		2F4925442B00FE3E00C471A7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		2F4925462B02084900C471A7 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +57,8 @@
 			children = (
 				2F4925362B00FE2900C471A7 /* YuppApp.swift */,
 				2F4925382B00FE2900C471A7 /* ContentView.swift */,
-				2F4925442B00FE3E00C471A7 /* Tasks.swift */,
+				2F4925462B02084900C471A7 /* EditView.swift */,
+				2F4925442B00FE3E00C471A7 /* Task.swift */,
 				2F49253A2B00FE2D00C471A7 /* Assets.xcassets */,
 				2F49253C2B00FE2D00C471A7 /* Preview Content */,
 			);
@@ -141,7 +144,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F4925392B00FE2900C471A7 /* ContentView.swift in Sources */,
-				2F4925452B00FE3E00C471A7 /* Tasks.swift in Sources */,
+				2F4925452B00FE3E00C471A7 /* Task.swift in Sources */,
+				2F4925472B02084900C471A7 /* EditView.swift in Sources */,
 				2F4925372B00FE2900C471A7 /* YuppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

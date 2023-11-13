@@ -14,6 +14,6 @@ struct YuppApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Tasks.self)
+        .modelContainer(for: Task.self)
     }
 }
