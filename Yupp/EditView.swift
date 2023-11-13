@@ -40,8 +40,9 @@ struct EditView: View {
                             .padding([.leading, .top], 10)
                         
                         TextField("sub", text: $task.sub)
-                            .bold()
+                            .foregroundColor(task.sub.isEmpty ? Color.white : Color.black)
                             .foregroundStyle(.black)
+                            .bold()
                             .padding([.trailing, .top], 10)
 
                         

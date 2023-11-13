@@ -32,7 +32,7 @@ struct ContentView: View {
                 Spacer()
             }
             .navigationDestination(for: Task.self, destination: EditView.init)
-            .navigationTitle("Title")
+            .navigationTitle("Tasks")
             .toolbar {
                 Button("Add Task", action: addTask)
             }
@@ -67,7 +67,7 @@ struct ContentView: View {
     func addTask() {
         let task = Task()
         modelContext.insert(task)
-        path = [task]
+//        path = [task]
     }
     
     func deleteTask(_ indexSet: IndexSet) {
