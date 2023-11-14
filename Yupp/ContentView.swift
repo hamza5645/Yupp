@@ -25,12 +25,24 @@ struct ContentView: View {
                 ForEach(tasks) { tasks in
                     NavigationLink(value: tasks) {
                         VStack(alignment: .leading) {
-                            TaskView(title: tasks.title)
+                            ZStack {
+                                Rectangle()
+                                    .foregroundStyle(yellowCustom)
+                                    .cornerRadius(5)
+                                HStack {
+                                    Text(tasks.title)
+                                        .font(.system(size: 30))
+                                        .foregroundStyle(.black)
+                                        .padding()
+                                    Spacer()
+                                }
+                            }
+                            .frame(height: 60)
+                            .padding([.trailing, .leading, .bottom])
                         }
                     }
                 }
                 .onDelete(perform: deleteTask)
-                
                 Spacer()
             }
             .navigationDestination(for: Task.self, destination: EditView.init)
@@ -69,29 +81,6 @@ struct DotView: View {
             .padding(.trailing, hasTrailingPadding ? 20 : 0)
     }
 }
-
-//Single Task Structure
-struct TaskView: View {
-    var title: String
-    
-    var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundStyle(yellowCustom)
-                .cornerRadius(5)
-            HStack {
-                Text(title)
-                    .font(.system(size: 30))
-                    .foregroundStyle(.black)
-                    .padding()
-                Spacer()
-            }
-        }
-        .frame(height: 60)
-        .padding([.trailing, .leading, .bottom])
-    }
-}
-
 
 #Preview {
     ContentView()
