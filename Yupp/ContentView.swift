@@ -22,8 +22,9 @@ struct ContentView: View {
         //Tasks View
         NavigationStack(path: $path) {
             VStack {
-                ForEach(tasks) { tasks in
-                    NavigationLink(value: tasks) {
+                ScrollView {
+                    ForEach(tasks) { tasks in
+                        //                    NavigationLink(value: tasks) {
                         VStack(alignment: .leading) {
                             ZStack {
                                 Rectangle()
@@ -40,10 +41,11 @@ struct ContentView: View {
                             .frame(height: 60)
                             .padding([.trailing, .leading, .bottom])
                         }
+                        //                    }
                     }
+                    .onDelete(perform: deleteTask)
+                    Spacer()
                 }
-                .onDelete(perform: deleteTask)
-                Spacer()
             }
             .navigationDestination(for: Task.self, destination: EditView.init)
             .navigationTitle("Tasks")
