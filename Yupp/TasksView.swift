@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftData
 
+var isEditing: Bool = false
+
 struct TasksView: View {
     @Bindable var task: Task
     
@@ -18,10 +20,20 @@ struct TasksView: View {
                     .foregroundStyle(yellowCustom)
                     .cornerRadius(5)
                 HStack {
-                    TextField("What do you want to do?", text: $task.title)
-                        .font(.system(size: 30))
-                        .foregroundStyle(.black)
-                        .padding()
+                    if isEditing {
+                        TextField("What do you want to do?", text: $task.title)
+                            .font(.system(size: 30))
+                            .foregroundStyle(.black)
+                            .padding()
+                            .onSubmit {
+                                isEditing = false
+                            }
+                    } else {
+                        Text(task.title)
+                            .font(.system(size: 30))
+                            .foregroundStyle(.black)
+                            .padding()
+                    }
                     Spacer()
                 }
             }

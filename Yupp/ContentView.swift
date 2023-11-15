@@ -43,6 +43,7 @@ struct ContentView: View {
     // addTask
     func addTask() {
         let task = Task()
+        isEditing = true
         modelContext.insert(task)
     }
     
