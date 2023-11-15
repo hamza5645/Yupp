@@ -14,7 +14,7 @@ let yellowCustom = Color(red: 1, green: 0.811, blue: 0, opacity: 1.0)
 struct ContentView: View {
     //SwiftData
     @Environment(\.modelContext) var modelContext
-    @Query var tasks: [Task]
+    @Query var task: [Task]
     @State private var path = [Task]()
     
     var body: some View {
@@ -23,25 +23,10 @@ struct ContentView: View {
         NavigationStack(path: $path) {
             VStack {
                 ScrollView {
-                    ForEach(tasks) { tasks in
-                        //                    NavigationLink(value: tasks) {
-                        VStack(alignment: .leading) {
-                            ZStack {
-                                Rectangle()
-                                    .foregroundStyle(yellowCustom)
-                                    .cornerRadius(5)
-                                HStack {
-                                    Text(tasks.title)
-                                        .font(.system(size: 30))
-                                        .foregroundStyle(.black)
-                                        .padding()
-                                    Spacer()
-                                }
-                            }
-                            .frame(height: 60)
-                            .padding([.trailing, .leading, .bottom])
-                        }
-                        //                    }
+                    ForEach(task) { task in
+//                    NavigationLink(value: tasks) {
+                        TasksView(task: task)
+//                    }
                     }
                     .onDelete(perform: deleteTask)
                     Spacer()
@@ -64,7 +49,7 @@ struct ContentView: View {
     // deleteTask
     func deleteTask(_ indexSet: IndexSet) {
         for index in indexSet {
-            let task = tasks[index]
+            let task = task[index]
             modelContext.delete(task)
         }
     }
