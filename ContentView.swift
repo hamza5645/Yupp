@@ -16,6 +16,7 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Query var task: [Task]
     @State private var path = [Task]()
+    @State private var isDragging = false
     
     var body: some View {
         
@@ -38,6 +39,20 @@ struct ContentView: View {
                 Button("Add Task", action: addTask)
             }
         }
+        .gesture(
+            DragGesture()
+                .onChanged{ value in
+                    if value.translation.height > 0 && !isDragging {
+                            addTask()
+                        print("Done")
+                        isDragging = true
+                    }
+                }
+                .onEnded { _ in
+                    isDragging = false
+                }
+        )
+
     }
     
     // addTask
