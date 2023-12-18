@@ -71,7 +71,7 @@ struct SwipeToDeleteView: View {
     var task: Task
     var onDelete: () -> Void
     @State private var offset = CGSize.zero
-
+    
     var body: some View {
         HStack(spacing: 0) {
             TasksView(task: task)
@@ -91,23 +91,20 @@ struct SwipeToDeleteView: View {
                             }
                         }
                 )
-
+            
             if offset.width < 0 {
                 Button(action: onDelete) {
                     Text("Delete")
                         .frame(width: -offset.width, height: 40)
                         .foregroundColor(.white)
                         .background(Color.red)
-                        .cornerRadius(20) // Makes the button rounded
+                        .cornerRadius(5) // Makes the button rounded
                         .padding(.trailing, -offset.width > 100 ? 0 : -offset.width - 100) // Adjusts padding for text wrapping
                 }
             }
         }
     }
 }
-
-
-
 //Dot View Structure
 struct DotView: View {
     var color: Color
