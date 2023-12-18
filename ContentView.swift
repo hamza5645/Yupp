@@ -25,9 +25,7 @@ struct ContentView: View {
             VStack {
                 ScrollView {
                     ForEach(task) { task in
-//                    NavigationLink(value: tasks) {
                         TasksView(task: task)
-//                    }
                     }
                     .onDelete(perform: deleteTask)
                     Spacer()
