@@ -19,15 +19,15 @@ struct ContentView: View {
     @State private var isDragging = false
     
     var body: some View {
-        
         //Tasks View
         NavigationStack(path: $path) {
             VStack {
                 ScrollView {
-                    ForEach(task) { task in
-                        TasksView(task: task)
+                    ForEach(task) { taskItem in
+                        SwipeToDeleteView(task: taskItem, onDelete: {
+                            deleteTask(taskItem)
+                        })
                     }
-                    .onDelete(perform: deleteTask)
                     Spacer()
                 }
             }
@@ -37,11 +37,12 @@ struct ContentView: View {
                 Button("Add Task", action: addTask)
             }
         }
+        
         .gesture(
             DragGesture()
                 .onChanged{ value in
                     if value.translation.height > 0 && !isDragging {
-                            addTask()
+                        addTask()
                         print("Done")
                         isDragging = true
                     }
@@ -50,7 +51,13 @@ struct ContentView: View {
                     isDragging = false
                 }
         )
-
+        
+    }
+    
+    private func deleteTask(_ taskToDelete: Task) {
+        if let index = task.firstIndex(where: { $0.id == taskToDelete.id }) {
+            modelContext.delete(taskToDelete)
+        }
     }
     
     // addTask
@@ -68,6 +75,41 @@ struct ContentView: View {
         }
     }
 }
+
+struct SwipeToDeleteView: View {
+    var task: Task
+    var onDelete: () -> Void
+    @State private var offset = CGSize.zero
+    
+    var body: some View {
+        HStack {
+            TasksView(task: task)
+                .offset(x: offset.width)
+                .gesture(
+                    DragGesture()
+                        .onChanged { gesture in
+                            if gesture.translation.width < 0 { // Left swipe
+                                self.offset = gesture.translation
+                            }
+                        }
+                        .onEnded { _ in
+                            if self.offset.width < -100 {
+                                onDelete()
+                            }
+                            self.offset = .zero
+                        }
+                )
+            
+            if offset.width < -100 {
+                Button("Delete", action: onDelete)
+                    .frame(width: 100)
+                    .background(Color.red)
+                    .foregroundColor(.white)
+            }
+        }
+    }
+}
+
 
 //Dot View Structure
 struct DotView: View {
