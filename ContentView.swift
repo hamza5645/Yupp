@@ -53,25 +53,16 @@ struct ContentView: View {
         )
         
     }
-    
-    private func deleteTask(_ taskToDelete: Task) {
-        if let index = task.firstIndex(where: { $0.id == taskToDelete.id }) {
-            modelContext.delete(taskToDelete)
-        }
-    }
-    
     // addTask
     func addTask() {
         let task = Task()
         isEditing = true
         modelContext.insert(task)
     }
-    
-    // deleteTask
-    func deleteTask(_ indexSet: IndexSet) {
-        for index in indexSet {
-            let task = task[index]
-            modelContext.delete(task)
+    //deleteTask
+    private func deleteTask(_ taskToDelete: Task) {
+        if let index = task.firstIndex(where: { $0.id == taskToDelete.id }) {
+            modelContext.delete(taskToDelete)
         }
     }
 }
@@ -80,9 +71,9 @@ struct SwipeToDeleteView: View {
     var task: Task
     var onDelete: () -> Void
     @State private var offset = CGSize.zero
-    
+
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             TasksView(task: task)
                 .offset(x: offset.width)
                 .gesture(
@@ -93,22 +84,28 @@ struct SwipeToDeleteView: View {
                             }
                         }
                         .onEnded { _ in
-                            if self.offset.width < -100 {
+                            if self.offset.width < -100 { // Threshold for deletion
                                 onDelete()
+                            } else {
+                                self.offset = .zero
                             }
-                            self.offset = .zero
                         }
                 )
-            
-            if offset.width < -100 {
-                Button("Delete", action: onDelete)
-                    .frame(width: 100)
-                    .background(Color.red)
-                    .foregroundColor(.white)
+
+            if offset.width < 0 {
+                Button(action: onDelete) {
+                    Text("Delete")
+                        .frame(width: -offset.width, height: 40)
+                        .foregroundColor(.white)
+                        .background(Color.red)
+                        .cornerRadius(20) // Makes the button rounded
+                        .padding(.trailing, -offset.width > 100 ? 0 : -offset.width - 100) // Adjusts padding for text wrapping
+                }
             }
         }
     }
 }
+
 
 
 //Dot View Structure
