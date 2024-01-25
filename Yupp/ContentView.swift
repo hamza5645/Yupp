@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 // Custom Yellow
 let yellowCustom = Color(red: 1, green: 0.811, blue: 0, opacity: 1.0)
@@ -14,29 +15,54 @@ let yellowCustom = Color(red: 1, green: 0.811, blue: 0, opacity: 1.0)
 struct ContentView: View {
     //SwiftData
     @Environment(\.modelContext) var modelContext
-    @Query var task: [Task]
+    @Query(sort: [SortDescriptor(\Task.complete), SortDescriptor(\Task.date, order: .reverse)]) var task: [Task]
     @State private var path = [Task]()
     
+    
     var body: some View {
-        
-        //Tasks View
         NavigationStack(path: $path) {
-            VStack {
-                ScrollView {
-                    ForEach(task) { task in
-//                    NavigationLink(value: tasks) {
-                        TasksView(task: task)
-//                    }
-                    }
-                    .onDelete(perform: deleteTask)
-                    Spacer()
+            List {
+                ForEach(task) { task in
+                    TasksView(task: task)
+                        .strikethrough(task.complete)
+                        .foregroundColor(task.complete ? .gray : .primary)
+                    
+                    //Done Gesture
+                        .swipeActions(edge: .leading) {
+                            if task.complete {
+                                Button("Not Done") {
+                                    notDone(task: task)
+                                }
+                                .tint(.yellow)
+                            } else {
+                                Button("Done") {
+                                    done(task: task)
+                                }
+                                .tint(.green)
+                            }
+                        }
                 }
+                //Delete Gesture
+                .onDelete(perform: deleteTask)
             }
-            .navigationDestination(for: Task.self, destination: EditView.init)
+            .animation(.default, value: task)
+            
+            //addTask Gesture
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        if value.translation.height > 0 && abs(value.translation.height) > abs(value.translation.width) {
+                            addTask()
+                        }
+                    }
+            )
             .navigationTitle("Tasks")
             .toolbar {
                 Button("Add Task", action: addTask)
             }
+        }
+        .onAppear {
+            requestNotificationPermission()
         }
     }
     
@@ -54,19 +80,34 @@ struct ContentView: View {
             modelContext.delete(task)
         }
     }
+    
+    // swipeDone
+    func done(task: Task) {
+        task.complete = true
+    }
+    
+    // swipeNotDone
+    func notDone(task: Task) {
+        task.complete = false
+    }
+    
+    //Notifications permission
+    func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("Permission granted")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
-//Dot View Structure
-struct DotView: View {
-    var color: Color
-    var hasTrailingPadding: Bool
-    
-    var body: some View {
-        Circle()
-            .frame(width: 10, height: 10)
-            .foregroundStyle(color)
-            .padding([.top, .bottom], 20)
-            .padding(.trailing, hasTrailingPadding ? 20 : 0)
+//Sort Boolean
+extension Bool: Comparable {
+    public static func <(lhs: Self, rhs: Self) -> Bool {
+        // the only true inequality is false < true
+        !lhs && rhs
     }
 }
 

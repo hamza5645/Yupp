@@ -14,45 +14,15 @@ struct TasksView: View {
     @Bindable var task: Task
     
     var body: some View {
-        VStack(alignment: .leading) {
-            ZStack {
-                Rectangle()
-                    .foregroundStyle(yellowCustom)
-                    .cornerRadius(5)
-                HStack {
-                    if isEditing {
-                        TextField("What do you want to do?", text: $task.title)
-                            .font(.system(size: 30))
-                            .foregroundStyle(.black)
-                            .padding()
-                            .onSubmit {
-                                isEditing = false
-                            }
-                    } else {
-                        Text(task.title)
-                            .font(.system(size: 30))
-                            .foregroundStyle(.black)
-                            .padding()
+        HStack {
+            if isEditing {
+                TextField("What do you want to do?", text: $task.title)
+                    .onSubmit {
+                        isEditing = false
                     }
-                    Spacer()
-                }
+            } else {
+                NavigationLink(task.title, destination: DetailedView(task: task))
             }
-            .frame(height: 60)
-            .padding([.trailing, .leading, .bottom])
         }
     }
 }
-
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Task.self, configurations: config)
-        let example = Task(title: "Example Title", discription: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.", sub: "This is a subtask", date: .now)
-        return EditView(task: example)
-            .modelContainer(container)
-    } catch {
-        fatalError("Failed to create model container.")
-    }
-
-}
-
