@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F29EDB32B7C0AD900E61EAA /* CompleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F29EDB12B7C0AD900E61EAA /* CompleteTask.swift */; };
 		2F393EC12B62721600253152 /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F393EC02B62721600253152 /* DetailedView.swift */; };
 		2F4925372B00FE2900C471A7 /* YuppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4925362B00FE2900C471A7 /* YuppApp.swift */; };
 		2F4925392B00FE2900C471A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4925382B00FE2900C471A7 /* ContentView.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2F29EDB12B7C0AD900E61EAA /* CompleteTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTask.swift; sourceTree = "<group>"; };
 		2F393EC02B62721600253152 /* DetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedView.swift; sourceTree = "<group>"; };
 		2F4925332B00FE2900C471A7 /* Yupp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yupp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F4925362B00FE2900C471A7 /* YuppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YuppApp.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			children = (
 				2F65F3212B7BDD650066275C /* ListWidgetBundle.swift */,
 				2F65F3232B7BDD650066275C /* ListWidget.swift */,
+				2F29EDB12B7C0AD900E61EAA /* CompleteTask.swift */,
 				2F65F3252B7BDD660066275C /* Assets.xcassets */,
 				2F65F3272B7BDD660066275C /* Info.plist */,
 			);
@@ -264,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F65F3222B7BDD650066275C /* ListWidgetBundle.swift in Sources */,
+				2F29EDB32B7C0AD900E61EAA /* CompleteTask.swift in Sources */,
 				2F65F32F2B7BDE790066275C /* Task.swift in Sources */,
 				2F65F3242B7BDD650066275C /* ListWidget.swift in Sources */,
 			);

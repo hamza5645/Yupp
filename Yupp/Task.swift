@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 class Task {
-    var title: String
+    @Attribute(.unique) var title: String
     var discription: String
     var sub: String
     var date: Date

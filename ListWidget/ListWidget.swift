@@ -49,7 +49,13 @@ struct ListWidgetEntryView : View {
     var body: some View {
         VStack {
             ForEach(entry.tasks) { task in
-                Text(task.title)
+                Button(intent: CompleteTask(tasksTitle: task.title)) {
+                    HStack {
+                        Image(systemName: task.complete ? "circle.fill" : "circle")
+                        Spacer()
+                        Text(task.title)
+                    }
+                }
             }
         }
     }
