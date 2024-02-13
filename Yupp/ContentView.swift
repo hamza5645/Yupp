@@ -49,15 +49,20 @@ struct ContentView: View {
             .animation(.default, value: task)
             
             //addTask Gesture
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        if value.translation.height > 0 && abs(value.translation.height) > abs(value.translation.width) {
-                            addTask()
-                        }
-                    }
-            )
+//            .gesture(
+//                DragGesture()
+//                    .onChanged { value in
+//                        if value.translation.height > 0 && abs(value.translation.height) > abs(value.translation.width) {
+//                            addTask()
+//                        }
+//                    }
+//            )
             .navigationTitle("Tasks")
+            .toolbar {
+                Button("Add Task") {
+                    addTask()
+                }
+            }
         }
         .onAppear {
             requestNotificationPermission()
@@ -124,14 +129,10 @@ struct ContentView: View {
 
         let customTask3 = Task()
         customTask3.title = "Swipe left to delete"
-        
-        let customTask4 = Task()
-        customTask4.title = "Swipe down to add a Task"
 
         modelContext.insert(customTask1)
         modelContext.insert(customTask2)
         modelContext.insert(customTask3)
-        modelContext.insert(customTask4)
 
         try? modelContext.save()
     }
