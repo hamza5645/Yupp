@@ -12,6 +12,7 @@ import UserNotifications
 struct DetailedView: View {
     @Bindable var task: Task
     @State private var subCompleted = false
+    var exclamationmarkSize = 30
     
     var body: some View {
         VStack {
@@ -24,6 +25,69 @@ struct DetailedView: View {
                     .bold()
                 
                 Spacer()
+                
+                //priority
+                HStack{
+                    
+                    //priority 1
+                    Button {
+                        if task.priority == 0 {
+                            task.priority = 1
+                        } else if task.priority == 2 || task.priority == 3 {
+                            task.priority = 1
+                        } else {
+                            task.priority = 0
+                        }
+                    }label: {
+                        if task.priority == 1 || task.priority == 2 || task.priority == 3 {
+                            Image(systemName: "exclamationmark")
+                                .foregroundStyle(.yellow)
+                                .font(.system(size: CGFloat(exclamationmarkSize), weight: .black))
+                        } else {
+                            Image(systemName: "exclamationmark")
+                                .foregroundStyle(.gray.opacity(0.3))
+                                .font(.system(size: CGFloat(exclamationmarkSize), weight: .black))
+                        }
+                    }
+                    
+                    //priority 2
+                    Button {
+                        if task.priority == 1 || task.priority == 3 || task.priority == 0 {
+                            task.priority = 2
+                        } else {
+                            task.priority = 1
+                        }
+                    }label: {
+                        if task.priority == 2 || task.priority == 3 {
+                            Image(systemName: "exclamationmark")
+                                .foregroundStyle(.yellow)
+                                .font(.system(size: CGFloat(exclamationmarkSize), weight: .black))
+                        } else {
+                            Image(systemName: "exclamationmark")
+                                .foregroundStyle(.gray.opacity(0.3))
+                                .font(.system(size: CGFloat(exclamationmarkSize), weight: .black))
+                        }
+                    }
+                    
+                    //priority 3
+                    Button {
+                        if task.priority == 2 || task.priority == 1 || task.priority == 0 {
+                            task.priority = 3
+                        } else {
+                            task.priority = 2
+                        }
+                    }label: {
+                        if task.priority == 3 {
+                            Image(systemName: "exclamationmark")
+                                .foregroundStyle(.yellow)
+                                .font(.system(size: CGFloat(exclamationmarkSize), weight: .black))
+                        } else {
+                            Image(systemName: "exclamationmark")
+                                .foregroundStyle(.gray.opacity(0.3))
+                                .font(.system(size: CGFloat(exclamationmarkSize), weight: .black))
+                        }
+                    }
+                }
             }
             .padding([.leading, .trailing, .bottom])
             
@@ -59,85 +123,6 @@ struct DetailedView: View {
                             .padding()
                     }
                 }
-            }
-            
-            //priority
-            HStack{
-                
-                //priority 1
-                Button {
-                    if task.priority == 0 {
-                        task.priority = 1
-                        print(task.priority)
-                    } else if task.priority == 2 || task.priority == 3 {
-                        task.priority = 1
-                        print(task.priority)
-                    } else {
-                        task.priority = 0
-                        print(task.priority)
-                    }
-                }label: {
-                    if task.priority == 1 || task.priority == 2 || task.priority == 3 {
-                        Image(systemName: "exclamationmark")
-                            .foregroundStyle(.yellow)
-                            .font(.title)
-                            .bold()
-                    } else {
-                        Image(systemName: "exclamationmark")
-                            .foregroundStyle(.white)
-                            .font(.title)
-                            .bold()
-                    }
-                }
-                .padding([.leading, .trailing])
-                
-                //priority 2
-                Button {
-                    if task.priority == 1 || task.priority == 3 || task.priority == 0 {
-                        task.priority = 2
-                        print(task.priority)
-                    } else {
-                        task.priority = 1
-                        print(task.priority)
-                    }
-                }label: {
-                    if task.priority == 2 || task.priority == 3 {
-                        Image(systemName: "exclamationmark")
-                            .foregroundStyle(.yellow)
-                            .font(.title)
-                            .bold()
-                    } else {
-                        Image(systemName: "exclamationmark")
-                            .foregroundStyle(.white)
-                            .font(.title)
-                            .bold()
-                    }
-                }
-                .padding([.leading, .trailing])
-                
-                //priority 3
-                Button {
-                    if task.priority == 2 || task.priority == 1 || task.priority == 0 {
-                        task.priority = 3
-                        print(task.priority)
-                    } else {
-                        task.priority = 2
-                        print(task.priority)
-                    }
-                }label: {
-                    if task.priority == 3 {
-                        Image(systemName: "exclamationmark")
-                            .foregroundStyle(.yellow)
-                            .font(.title)
-                            .bold()
-                    } else {
-                        Image(systemName: "exclamationmark")
-                            .foregroundStyle(.white)
-                            .font(.title)
-                            .bold()
-                    }
-                }
-                .padding([.leading, .trailing])
             }
             
             //Describtion
