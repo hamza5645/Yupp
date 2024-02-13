@@ -61,6 +61,86 @@ struct DetailedView: View {
                 }
             }
             
+            //priority
+            HStack{
+                
+                //priority 1
+                Button {
+                    if task.priority == 0 {
+                        task.priority = 1
+                        print(task.priority)
+                    } else if task.priority == 2 || task.priority == 3 {
+                        task.priority = 1
+                        print(task.priority)
+                    } else {
+                        task.priority = 0
+                        print(task.priority)
+                    }
+                }label: {
+                    if task.priority == 1 || task.priority == 2 || task.priority == 3 {
+                        Image(systemName: "exclamationmark")
+                            .foregroundStyle(.yellow)
+                            .font(.title)
+                            .bold()
+                    } else {
+                        Image(systemName: "exclamationmark")
+                            .foregroundStyle(.white)
+                            .font(.title)
+                            .bold()
+                    }
+                }
+                .padding([.leading, .trailing])
+                
+                //priority 2
+                Button {
+                    if task.priority == 1 || task.priority == 3 || task.priority == 0 {
+                        task.priority = 2
+                        print(task.priority)
+                    } else {
+                        task.priority = 1
+                        print(task.priority)
+                    }
+                }label: {
+                    if task.priority == 2 || task.priority == 3 {
+                        Image(systemName: "exclamationmark")
+                            .foregroundStyle(.yellow)
+                            .font(.title)
+                            .bold()
+                    } else {
+                        Image(systemName: "exclamationmark")
+                            .foregroundStyle(.white)
+                            .font(.title)
+                            .bold()
+                    }
+                }
+                .padding([.leading, .trailing])
+                
+                //priority 3
+                Button {
+                    if task.priority == 2 || task.priority == 1 || task.priority == 0 {
+                        task.priority = 3
+                        print(task.priority)
+                    } else {
+                        task.priority = 2
+                        print(task.priority)
+                    }
+                }label: {
+                    if task.priority == 3 {
+                        Image(systemName: "exclamationmark")
+                            .foregroundStyle(.yellow)
+                            .font(.title)
+                            .bold()
+                    } else {
+                        Image(systemName: "exclamationmark")
+                            .foregroundStyle(.white)
+                            .font(.title)
+                            .bold()
+                    }
+                }
+                .padding([.leading, .trailing])
+            }
+            
+            //Describtion
             TextField("Describe your task", text: $task.discription)
                 .padding()
             
