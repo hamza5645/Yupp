@@ -20,6 +20,7 @@
 		2F65F3242B7BDD650066275C /* ListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F65F3232B7BDD650066275C /* ListWidget.swift */; };
 		2F65F3262B7BDD660066275C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F65F3252B7BDD660066275C /* Assets.xcassets */; };
 		2F65F32A2B7BDD660066275C /* ListWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2F65F31A2B7BDD650066275C /* ListWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2F65F32F2B7BDE790066275C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4925442B00FE3E00C471A7 /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		2F65F3232B7BDD650066275C /* ListWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidget.swift; sourceTree = "<group>"; };
 		2F65F3252B7BDD660066275C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F65F3272B7BDD660066275C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F65F3302B7C025A0066275C /* ListWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ListWidgetExtension.entitlements; sourceTree = "<group>"; };
+		2F65F3312B7C033B0066275C /* Yupp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Yupp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,7 @@
 		2F49252A2B00FE2900C471A7 = {
 			isa = PBXGroup;
 			children = (
+				2F65F3302B7C025A0066275C /* ListWidgetExtension.entitlements */,
 				2F4925352B00FE2900C471A7 /* Yupp */,
 				2F65F3202B7BDD650066275C /* ListWidget */,
 				2F65F31B2B7BDD650066275C /* Frameworks */,
@@ -106,6 +110,7 @@
 		2F4925352B00FE2900C471A7 /* Yupp */ = {
 			isa = PBXGroup;
 			children = (
+				2F65F3312B7C033B0066275C /* Yupp.entitlements */,
 				2F4925362B00FE2900C471A7 /* YuppApp.swift */,
 				2F4925382B00FE2900C471A7 /* ContentView.swift */,
 				2F4B84AF2B048F0D00EB2070 /* TasksView.swift */,
@@ -259,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F65F3222B7BDD650066275C /* ListWidgetBundle.swift in Sources */,
+				2F65F32F2B7BDE790066275C /* Task.swift in Sources */,
 				2F65F3242B7BDD650066275C /* ListWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +405,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Yupp/Yupp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Yupp/Preview Content\"";
@@ -429,6 +436,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Yupp/Yupp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Yupp/Preview Content\"";
@@ -458,6 +466,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ListWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 55L48W2DHK;
@@ -486,6 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ListWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 55L48W2DHK;

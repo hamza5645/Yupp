@@ -7,48 +7,50 @@
 
 import WidgetKit
 import SwiftUI
+import SwiftData
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
+    @MainActor func placeholder(in context: Context) -> SimpleEntry {
+        SimpleEntry(date: Date(), tasks: getTasks())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+    @MainActor func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+        let entry = SimpleEntry(date: Date(), tasks: getTasks())
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+    @MainActor func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        let timeline = Timeline(entries: [SimpleEntry(date: .now, tasks: getTasks())], policy: .after(.now.advanced(by: 60 * 5)))
         completion(timeline)
+    }
+    
+    @MainActor
+    private func getTasks() -> [Task] {
+        guard let modelContainer = try? ModelContainer(for: Task.self) else {
+            return []
+        }
+        let descriptor = FetchDescriptor<Task>()
+        let Task = try? modelContainer.mainContext.fetch(descriptor)
+        
+        return Task ?? []
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let emoji: String
+    let tasks: [Task]
+    @State private var subCompleted = false
 }
 
 struct ListWidgetEntryView : View {
     var entry: Provider.Entry
+    @State private var subCompleted = false
 
     var body: some View {
         VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Emoji:")
-            Text(entry.emoji)
+            ForEach(entry.tasks) { task in
+                Text(task.title)
+            }
         }
     }
 }
@@ -75,6 +77,6 @@ struct ListWidget: Widget {
 #Preview(as: .systemSmall) {
     ListWidget()
 } timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
+    SimpleEntry(date: .now, tasks: [])
+    SimpleEntry(date: .now, tasks: [])
 }
