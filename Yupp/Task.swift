@@ -8,9 +8,6 @@
 import Foundation
 import SwiftData
 
-import Foundation
-import SwiftData
-
 @Model
 class Task {
     var title: String

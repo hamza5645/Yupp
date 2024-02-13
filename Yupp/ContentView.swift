@@ -17,6 +17,7 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: [SortDescriptor(\Task.complete), SortDescriptor(\Task.date, order: .reverse)]) var task: [Task]
     @State private var path = [Task]()
+    let firstLaunchKey = "hasLaunchedBefore"
     
     
     var body: some View {
@@ -57,12 +58,10 @@ struct ContentView: View {
                     }
             )
             .navigationTitle("Tasks")
-            .toolbar {
-                Button("Add Task", action: addTask)
-            }
         }
         .onAppear {
             requestNotificationPermission()
+            checkFirstLaunch()
         }
     }
     
@@ -101,6 +100,41 @@ struct ContentView: View {
             }
         }
     }
+    
+    //Checks if user launched the app before
+    func checkFirstLaunch() {
+        if !UserDefaults.standard.bool(forKey: firstLaunchKey) {
+            // First launch, initialize tasks
+            initializeTasksWithCustom()
+
+            // Set the flag to true so this doesn't run again
+            UserDefaults.standard.set(true, forKey: firstLaunchKey)
+        }
+    }
+
+    
+    //Guide tasks
+    func initializeTasksWithCustom() {
+        let customTask1 = Task()
+        customTask1.title = "swipe right to mark us uncompleted"
+        customTask1.complete = true
+
+        let customTask2 = Task()
+        customTask2.title = "Swipe right to complete"
+
+        let customTask3 = Task()
+        customTask3.title = "Swipe left to delete"
+        
+        let customTask4 = Task()
+        customTask4.title = "Swipe down to add a Task"
+
+        modelContext.insert(customTask1)
+        modelContext.insert(customTask2)
+        modelContext.insert(customTask3)
+        modelContext.insert(customTask4)
+
+        try? modelContext.save()
+    }
 }
 
 //Sort Boolean
@@ -109,8 +143,4 @@ extension Bool: Comparable {
         // the only true inequality is false < true
         !lhs && rhs
     }
-}
-
-#Preview {
-    ContentView()
 }

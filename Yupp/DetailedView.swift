@@ -108,8 +108,3 @@ struct DetailedView: View {
     }
     
 }
-
-
-//#Preview {
-//    DetailedView(task: Task)
-//}
