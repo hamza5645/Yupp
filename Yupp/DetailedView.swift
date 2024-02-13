@@ -49,6 +49,7 @@ struct DetailedView: View {
                                 .font(.system(size: CGFloat(exclamationmarkSize), weight: .black))
                         }
                     }
+                    .animation(.default, value: task.priority)
                     
                     //priority 2
                     Button {
@@ -68,6 +69,7 @@ struct DetailedView: View {
                                 .font(.system(size: CGFloat(exclamationmarkSize), weight: .black))
                         }
                     }
+                    .animation(.default, value: task.priority)
                     
                     //priority 3
                     Button {
@@ -87,6 +89,7 @@ struct DetailedView: View {
                                 .font(.system(size: CGFloat(exclamationmarkSize), weight: .black))
                         }
                     }
+                    .animation(.default, value: task.priority)
                 }
             }
             .padding([.leading, .trailing, .bottom])
