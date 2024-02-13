@@ -18,7 +18,7 @@ struct ContentView: View {
     @Query(sort: [SortDescriptor(\Task.complete), SortDescriptor(\Task.priority, order: .reverse), SortDescriptor(\Task.date, order: .reverse)]) var task: [Task]
     @State private var path = [Task]()
     let firstLaunchKey = "hasLaunchedBefore"
-    
+//    @FocusState private var focused: Bool?
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -74,6 +74,7 @@ struct ContentView: View {
     func addTask() {
         let task = Task()
         isEditing = true
+        task.priority = 3
         modelContext.insert(task)
     }
     
