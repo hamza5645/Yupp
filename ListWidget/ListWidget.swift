@@ -31,7 +31,8 @@ struct Provider: TimelineProvider {
         }
         let descriptor = FetchDescriptor<Task>(predicate: #Predicate { task in
             task.complete == false
-        })
+        }, sortBy: [SortDescriptor(\Task.complete), SortDescriptor(\Task.priority, order: .reverse), SortDescriptor(\Task.date, order: .reverse)]
+        )
         let Task = try? modelContainer.mainContext.fetch(descriptor)
         
         return Task ?? []
@@ -107,4 +108,12 @@ struct ListWidget: Widget {
 } timeline: {
     SimpleEntry(date: .now, tasks: [])
     SimpleEntry(date: .now, tasks: [])
+}
+
+//Sort Boolean
+extension Bool: Comparable {
+    public static func <(lhs: Self, rhs: Self) -> Bool {
+        // the only true inequality is false < true
+        !lhs && rhs
+    }
 }
