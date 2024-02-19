@@ -48,12 +48,31 @@ struct ListWidgetEntryView : View {
 
     var body: some View {
         VStack {
+            HStack {
+                Text("Tasks")
+                    .fontWeight(.semibold)
+                Spacer()
+                Text("3") //Replace with task.count later
+                    .bold()
+            }
+            Spacer()
             ForEach(entry.tasks) { task in
-                Button(intent: CompleteTask(tasksTitle: task.title)) {
-                    HStack {
-                        Image(systemName: task.complete ? "circle.fill" : "circle")
-                        Spacer()
-                        Text(task.title)
+                HStack {
+                    VStack {
+//                        Button(intent: CompleteTask(tasksTitle: task.title)) {
+//                            Image(systemName: task.complete ? "circle.fill" : "circle")
+//                        }
+                        Image(systemName: "circle")
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer()
+                    VStack {
+                        HStack {
+                            Text(task.title)
+                                .font(.headline)
+                                .fontWeight(.light)
+                            Spacer()
+                        }
                     }
                 }
             }
@@ -75,6 +94,7 @@ struct ListWidget: Widget {
                     .background()
             }
         }
+//        .supportedFamilies([.systemSmall])
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
     }
