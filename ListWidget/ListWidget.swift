@@ -29,7 +29,9 @@ struct Provider: TimelineProvider {
         guard let modelContainer = try? ModelContainer(for: Task.self) else {
             return []
         }
-        let descriptor = FetchDescriptor<Task>()
+        let descriptor = FetchDescriptor<Task>(predicate: #Predicate { task in
+            task.complete == false
+        })
         let Task = try? modelContainer.mainContext.fetch(descriptor)
         
         return Task ?? []
