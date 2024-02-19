@@ -56,7 +56,7 @@ struct ListWidgetEntryView : View {
                     .bold()
             }
             Spacer()
-            ForEach(entry.tasks) { task in
+            ForEach(entry.tasks.prefix(3)) { task in
                 HStack {
                     VStack {
 //                        Button(intent: CompleteTask(tasksTitle: task.title)) {
