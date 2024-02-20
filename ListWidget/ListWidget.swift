@@ -51,14 +51,13 @@ struct ListWidgetEntryView : View {
 
     var body: some View {
         VStack {
-            HStack {
+            HStack(alignment: .top) {
                 Text("Tasks")
                     .fontWeight(.semibold)
                 Spacer()
                 Text("3") //Replace with task.count later
                     .bold()
             }
-            Spacer()
             ForEach(entry.tasks.prefix(3)) { task in
                 HStack {
                     VStack {
@@ -72,13 +71,15 @@ struct ListWidgetEntryView : View {
                     VStack {
                         HStack {
                             Text(task.title)
-                                .font(.headline)
-                                .fontWeight(.light)
+                                .font(.subheadline)
+                                .fontWeight(.regular)
                             Spacer()
                         }
                     }
+                    .padding(3)
                 }
             }
+            Spacer()
         }
     }
 }
