@@ -61,11 +61,12 @@ struct ListWidgetEntryView : View {
             ForEach(entry.tasks.prefix(3)) { task in
                 HStack {
                     VStack {
-//                        Button(intent: CompleteTask(tasksTitle: task.title)) {
-//                            Image(systemName: task.complete ? "circle.fill" : "circle")
-//                        }
-                        Image(systemName: "circle")
-                            .foregroundStyle(.secondary)
+                        Button(intent: CompleteTask(tasksTitle: task.title)) {
+                            Image(systemName: task.complete ? "circle.fill" : "circle")
+                                .foregroundStyle(.gray)
+                        }
+                        .buttonStyle(.plain)
+//                            .opacity(0)
                     }
                     Spacer()
                     VStack {
