@@ -5,9 +5,9 @@
 //  Created by Hamza Osama on 2/13/24.
 //
 
-import Foundation
 import AppIntents
 import SwiftData
+import WidgetKit
 
 struct CompleteTask: AppIntent {
     static var title: LocalizedStringResource = "Toggle Complete"
@@ -37,6 +37,7 @@ struct CompleteTask: AppIntent {
             task.complete = !complete
         }
         
+        WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
         return.result()
     }
 }

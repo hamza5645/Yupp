@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import UserNotifications
+import WidgetKit
 
 struct DetailedView: View {
     @Bindable var task: Task
@@ -33,10 +34,13 @@ struct DetailedView: View {
                     Button {
                         if task.priority == 0 {
                             task.priority = 1
+                            WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
                         } else if task.priority == 2 || task.priority == 3 {
                             task.priority = 1
+                            WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
                         } else {
                             task.priority = 0
+                            WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
                         }
                     }label: {
                         if task.priority == 1 || task.priority == 2 || task.priority == 3 {
@@ -55,8 +59,10 @@ struct DetailedView: View {
                     Button {
                         if task.priority == 1 || task.priority == 3 || task.priority == 0 {
                             task.priority = 2
+                            WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
                         } else {
                             task.priority = 1
+                            WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
                         }
                     }label: {
                         if task.priority == 2 || task.priority == 3 {
@@ -75,8 +81,10 @@ struct DetailedView: View {
                     Button {
                         if task.priority == 2 || task.priority == 1 || task.priority == 0 {
                             task.priority = 3
+                            WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
                         } else {
                             task.priority = 2
+                            WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
                         }
                     }label: {
                         if task.priority == 3 {

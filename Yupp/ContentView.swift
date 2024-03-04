@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import UserNotifications
+import WidgetKit
 
 // Custom Yellow
 let yellowCustom = Color(red: 1, green: 0.811, blue: 0, opacity: 1.0)
@@ -76,6 +77,7 @@ struct ContentView: View {
         isEditing = true
         task.priority = 3
         modelContext.insert(task)
+        WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
     }
     
     // deleteTask
@@ -83,6 +85,7 @@ struct ContentView: View {
         for index in indexSet {
             let task = task[index]
             modelContext.delete(task)
+            WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
         }
     }
     
@@ -90,11 +93,13 @@ struct ContentView: View {
     func done(task: Task) {
         task.complete = true
         task.priority = 0
+        WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
     }
     
     // swipeNotDone
     func notDone(task: Task) {
         task.complete = false
+        WidgetCenter.shared.reloadTimelines(ofKind: "ListWidget")
     }
     
     //Notifications permission
